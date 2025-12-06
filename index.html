@@ -1,250 +1,92 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Devesh Khilnani</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500;600&family=Space+Grotesk:wght@400;500&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>Devesh K</title>
   <style>
     body {
-      background-color: #ffffff;
-      color: #000000;
-      font-family: "Space Grotesk", sans-serif;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      min-height: 100vh;
-      font-weight: 400;
+      font-size: 14px;
       line-height: 1.5;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      overflow-x: hidden;
-      cursor: none;
-    }
-
-    main {
-      max-width: 540px;
-      padding: 2rem;
-    }
-
-    h1, h2, p, li, .indented {
-      opacity: 0;
-      white-space: pre-wrap;
-    }
-
-    h1 {
-      font-family: "Roboto Mono", monospace;
-      color: #0044cc;
-      font-weight: 600;
-      font-size: 1.4rem;
-      margin-bottom: 0.5rem;
-      letter-spacing: 0.1em;
-      opacity: 1; /* always visible */
-    }
-
-    h1 .age {
-      font-family: "Space Grotesk", sans-serif;
-      font-style: italic;
-      font-weight: 400;
-      font-size: 0.75rem;
-      color: #666;
-      margin-left: 0.5rem;
-    }
-
-    h2 {
-      font-family: "Roboto Mono", monospace;
-      color: #0044cc;
-      font-weight: 600;
-      font-size: 1.1rem;
-      margin-top: 1.5rem;
-      margin-bottom: 0.4rem;
-    }
-
-    ul {
-      margin: 0 0 1rem 1.25rem;
+      margin: 20px;
       padding: 0;
     }
-
+    h1 {
+      font-size: 18px;
+      font-weight: normal;
+      margin: 0 0 8px 0;
+    }
+    h2 {
+      font-size: 14px;
+      font-weight: normal;
+      margin: 20px 0 5px 0;
+    }
+    p {
+      margin: 8px 0;
+    }
+    ul {
+      margin: 5px 0;
+    }
     li {
-      list-style: none;
-      margin-bottom: 0.5rem;
-      position: relative;
-      padding-left: 1em;
+      margin: 3px 0;
     }
-
-    li::before {
-      content: "•";
-      color: #0044cc;
-      position: absolute;
-      left: 0;
+    .email-at {
+      margin: 0 0.15em;
     }
-
-    .indented {
-      margin-left: 2rem;
-      font-style: italic;
+    .age {
+      font-size: 14px;
     }
-
-    a {
-      color: #0044cc;
-      text-decoration: underline;
-      transition: color 0.3s ease, text-shadow 0.3s ease;
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
     }
-
-    a:hover {
-      color: #1a76ff;
-      text-shadow: 0 0 6px #7bbcff;
-      text-decoration: none;
-    }
-
-    .cursor-dot,
-    .cursor-outline {
-      position: fixed;
-      top: 0;
-      left: 0;
-      pointer-events: none;
-      z-index: 9999;
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-    }
-
-    .cursor-dot {
-      width: 8px;
-      height: 8px;
-      background-color: #0044cc;
-      transition: transform 0.1s ease-out;
-    }
-
-    .cursor-outline {
-      width: 32px;
-      height: 32px;
-      border: 2px solid #0044cc;
-      transition: transform 0.15s ease-out;
+    .blink {
+      animation: blink 1s infinite;
     }
   </style>
 </head>
 <body>
-  <main id="main">
-    <h1>wsp, i'm <span id="scramble-name">devesh khilnani</span><span class="age">(17, high schooler)</span></h1>
-    
-    <p>i build stuff and cosplay being a startup founder (it's all vibecoded).</p>
-    <p>this site looks like this, not because i’m a minimalist, but rather because i only know html.</p>
+  <h1>wsp, i'm devesh khilnani <span class="age">(17, m)</span></h1>
+  
+  <p>building things that sound like lies.</p>
 
-    <h2>what i'm up to:</h2>
-    <ul>
-      <li>founder @ <a href="https://xyla.space" target="_blank">xyla</a>: growing plants out of thin air anywhere you want. raising $2.2M right now.</li>
-      <li>mafia @ <a href="https://fr8.so" target="_blank">FR8</a>: hacker hotel cult in finland. they have unlimited ice cream so i'm happy.</li>
-      <li>co-lead @ <a href="https://ases.stanford.edu/" target="_blank">stanford ases nyc</a>: throwing startup ragers. no clue why they let a highschooler run this lol.</li>
-      <li>taekwondo instructor: paid to beat up kids.</li>
-    </ul>
+  <h2>now:</h2>
+  <ul>
+    <li><a href="http://xyla.space" target="_blank">xyla</a> - growing food anywhere</li>
+    <li><a href="https://www.velocity11.us/" target="_blank">v11</a> - backing sci-fi</li>
+    <li><a href="https://ases.stanford.edu/" target="_blank">ases nyc</a> - startup nights</li>
+    <li><a href="https://fr8.so" target="_blank">fr8</a> - global hacker house cult</li>
+    <li><a>tkd</a> - paid to beat up kids</li>
+  </ul>
 
-    <h2>previously:</h2>
-    <ul>
-      <li>researcher/engineer @ nasa murep mcc: stole a garbage can for a proposed artemis III agri system.</li>
-      <li>founding member/coo @ <a href="https://jdable.org" target="_blank">jdable</a>: IoT assistive tech R&D lab.</li>
-      <li>founder @ <a href="https://locogo.co" target="_blank">locogo</a>: trying to fix airports (i’ve given up all hope on EWR).</li>
-      <li>biz lead @ <a href="https://dailysat.org" target="_blank">dailysat</a>: scaled 0 → 80k users + 4M views.</li>
-      <li>research @ rutgers: hacked duckweed for infinite biofuel.</li>
-      <li>contract growth marketing @ harvard seas: somehow landed this for hvtp. brought in 5 figs rev.</li>
-    </ul>
+  <h2>origin story:</h2>
+  <ul>
+    <li>got lost in an indian airport → built ar/vr nav startup
+    </li>
+    <li>moved to hardware → raised $500k → built a bme lab
 
-    <p class="indented">...and a bunch of other side missions i'm too lazy to add here</p>
+    </li>
+    <li>recruited at 16 for artemis III murep ag team
+    </li>
+    <li>wrote my own proposal → nasa funded it → kept the IP → started xyla
 
-    <h2>thinking about:</h2>
-    <ul>
-      <li>sociological changes in society with respect to evolution and exponential innovation</li>
-      <li>lettuce.</li>
-    </ul>
+    </li>
+    <li>turned down $15m+ of equity to build my own things
+    </li>
+    <li>etc</li>
+  </ul>
 
-    <h2>get in touch:</h2>
-    <p>follow me on <b><a href="https://x.com/dkilledhisnani" target="_blank">x / twitter</a></b> or email me at <b>dkhilnani [at] gmail [dot] com</b></p>
-    <p>email me if you want to talk about startups. or ducks. or duck-based startups, idk, the world is amazing.</p>
-  </main>
+  <h2>working assumptions</h2>
+  <ul>
+    <li>the future of engineering looks a lot like the past billion years of evolution</li>
+    <li>innovation is compounding faster than our instincts can keep up</li>
+    <li>food is the foundation layer of civilization and progress</li>
+  </ul>
 
-  <div class="cursor-dot"></div>
-  <div class="cursor-outline"></div>
+  <h2>contact:</h2>
+  <p><a href="https://x.com/dkilledhisnani" target="_blank">x/twitter</a> | <a href="https://linkedin.com/in/dkhilnani" target="_blank">linkedin</a> </p>
+   <p> devesh<span class="email-at">@</span>xyla.space</p>
 
-  <script>
-    // Custom cursor
-    const dot = document.querySelector(".cursor-dot");
-    const outline = document.querySelector(".cursor-outline");
-    let mouseX = 0, mouseY = 0, outlineX = 0, outlineY = 0;
+  <p>^ email me if you want to talk about startups. or ducks. or duck-based startups, idk, the world is <u>amazing</u><span class="blink">.</span></p>
 
-    document.addEventListener("mousemove", (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-      dot.style.top = mouseY + "px";
-      dot.style.left = mouseX + "px";
-    });
-
-    function animateOutline() {
-      outlineX += (mouseX - outlineX) * 0.1;
-      outlineY += (mouseY - outlineY) * 0.1;
-      outline.style.top = outlineY + "px";
-      outline.style.left = outlineX + "px";
-      requestAnimationFrame(animateOutline);
-    }
-    animateOutline();
-
-    // Scramble effect
-    const scrambleNameEl = document.getElementById("scramble-name");
-    const originalText = scrambleNameEl.textContent;
-    const chars = "abcdefghijklmnopqrstuvwxyz ";
-    let frame = 0;
-    const frameRate = 30;
-    const scrambleInterval = setInterval(() => {
-      let output = "";
-      for (let i = 0; i < originalText.length; i++) {
-        if (i < (frame / (2000 / frameRate)) * originalText.length) {
-          output += originalText.charAt(i);
-        } else {
-          output += chars.charAt(Math.floor(Math.random() * chars.length));
-        }
-      }
-      scrambleNameEl.textContent = output;
-      frame++;
-      if (frame > (2000 / frameRate)) {
-        clearInterval(scrambleInterval);
-        scrambleNameEl.textContent = originalText;
-      }
-    }, 1000 / frameRate);
-
-    // Typing effect
-    const elements = [...document.querySelectorAll("p, h2, li, .indented")];
-    let currentIndex = 0;
-
-    function typeLine(el, text, speed, cb) {
-      el.textContent = "";
-      el.style.opacity = 1;
-      let i = 0;
-      function type() {
-        el.textContent += text.charAt(i);
-        i++;
-        if (i < text.length) {
-          setTimeout(type, speed);
-        } else {
-          el.innerHTML = text; // retain original HTML like <a>
-          cb();
-        }
-      }
-      type();
-    }
-
-    function next() {
-      if (currentIndex >= elements.length) return;
-      const el = elements[currentIndex];
-      const text = el.innerHTML;
-      const plain = el.textContent;
-      el.innerHTML = ""; // Clear content
-      typeLine(el, plain, 4, () => {
-        el.innerHTML = text;
-        currentIndex++;
-        next();
-      });
-    }
-
-    window.addEventListener("load", next);
-  </script>
 </body>
 </html>
