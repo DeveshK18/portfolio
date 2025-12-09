@@ -2,23 +2,31 @@
 <html>
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Devesh K</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Average&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Average&family=Gabarito:wght@500&family=Fragment+Mono&display=swap" rel="stylesheet">
   <style>
+    html {
+      overflow-x: hidden;
+    }
     body {
       font-family: 'Average', serif;
       font-size: 14px;
       line-height: 1.5;
       margin: 20px;
-      padding: 0 0 0 10px;
+      padding: 0 0 0 20px; /* Increased left padding from 10px to 20px */
       text-align: left;
+      overflow-x: hidden;
+      position: relative;
     }
     h1 {
       font-size: 18px;
       font-weight: normal;
       margin: 0 0 8px 0;
+      position: relative;
+      z-index: 1;
     }
     h2 {
       font-size: 14px;
@@ -39,10 +47,29 @@
     }
     .age {
       font-size: 14px;
+      margin-left: 12px;
+    }
+    a {
+      color: #b22222;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
     }
     .name-highlight {
-      background-color: yellow;
-      padding: 2px 4px;
+      background-color: #b22222;        
+      color: white;
+      font-family: 'Average', serif;
+      font-weight: normal;
+      letter-spacing: 1px;
+      padding: 2px 8px;
+      text-transform: uppercase;
+      border: 2px solid #000;
+      box-shadow: 3.5px 3.5px 0 #000;
+      position: relative;
+      z-index: 2;
+      margin-left: -4px; /* Compensate for border and shadow */
+      display: inline-block;
     }
     @keyframes blink {
       0%, 50% { opacity: 1; }
@@ -51,16 +78,136 @@
     .blink {
       animation: blink 1s infinite;
     }
+    .tooltip-trigger {
+      text-decoration: underline;
+      text-decoration-style: dotted;
+      text-decoration-color: #b22222;
+      cursor: default;
+      position: relative;
+      display: inline-block;
+      max-width: 100%;
+    }
+    .tooltip {
+      visibility: hidden;
+      opacity: 0;
+      position: fixed;
+      background-color: #fff;
+      color: #b22222;
+      padding: 20px;
+      border: 4px solid #000;
+      box-shadow: 3.5px 3.5px 0 #000;
+      width: 500px;
+      max-width: 500px;
+      z-index: 10000;
+      font-family: 'Fragment Mono', monospace !important;
+      font-size: 14px;
+      line-height: 1.4;
+      transition: opacity 0.2s ease-in-out;
+      white-space: normal;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      box-sizing: border-box;
+      overflow: visible;
+    }
+    .tooltip-trigger:hover .tooltip {
+      visibility: visible;
+      opacity: 1;
+    }
+    
+    /* DESKTOP: Large screens - position to right */
+    @media (min-width: 1200px) {
+      .tooltip {
+        width: 500px;
+        max-width: 500px;
+      }
+    }
+    
+    /* DESKTOP: Medium screens - slightly smaller */
+    @media (min-width: 992px) and (max-width: 1199px) {
+      .tooltip {
+        width: 450px;
+        max-width: 450px;
+      }
+    }
+    
+    /* TABLET: Position below, responsive width */
+    @media (max-width: 991px) and (min-width: 768px) {
+      .tooltip {
+        left: 50%;
+        top: 150px;
+        transform: translateX(-50%);
+        margin-left: 0;
+        width: 90vw;
+        max-width: 90vw;
+        padding: 15px;
+      }
+    }
+    
+    /* MOBILE: Position below, responsive width */
+    @media (max-width: 767px) {
+      body {
+        padding-left: 15px; /* Adjust for mobile */
+        margin: 10px;
+      }
+      
+      .tooltip {
+        left: 50%;
+        top: 140px;
+        transform: translateX(-50%);
+        margin-left: 0;
+        width: calc(100vw - 40px);
+        max-width: calc(100vw - 40px);
+        padding: 15px;
+        font-size: 13px;
+      }
+      
+      .name-highlight {
+        margin-left: -2px; /* Less compensation on mobile */
+      }
+    }
+    
+    /* SMALL MOBILE: Adjust padding */
+    @media (max-width: 480px) {
+      body {
+        padding-left: 12px;
+        margin: 8px;
+      }
+      
+      .tooltip {
+        padding: 12px;
+        width: calc(100vw - 30px);
+        max-width: calc(100vw - 30px);
+        top: 120px;
+      }
+      
+      .name-highlight {
+        margin-left: -1px;
+      }
+    }
+    
+    /* Ensure the name highlight is fully visible on all screens */
+    @media (min-width: 768px) {
+      body::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 30px; /* Extra space for the name highlight */
+        height: 100%;
+        background: transparent;
+        z-index: 0;
+      }
+    }
   </style>
 </head>
 <body>
-  <h1>wsp, i'm <span class="name-highlight">devesh khilnani</span> <span class="age">(17, m)</span></h1>
+  <h1>wsp, i'm ‎   <span class="name-highlight">devesh khilnani</span><span class="age">(17, m)</span></h1>
   
   <p>building things that sound like lies.</p>
 
   <h2>now:</h2>
   <ul>
-    <li><a href="http://xyla.space" target="_blank">xyla</a> - growing food anywhere</li>
+    <li><a href="http://xyla.space" target="_blank">xyla</a> - food for <span class="tooltip-trigger">the next manifest destiny<span class="tooltip">Human progress has always been defined by food. The moment we learned to grow crops instead of chase animals we developed surplus, specialization, cities, technology, and expansion. Every frontier, continental, industrial, digital, and now extraterrestrial, has been gated by the food revolution that enabled it. As we push into harsher environments, off-grid industries, and off-world settlements, biology becomes the limiting factor again. The next chapter of human expansion needs an Agriculture 4.0, a new way to grow independent of environment, location, and infrastructure. Xyla is the foundation of the next manifest destiny.</span></span>    </li>
     <li><a href="https://www.velocity11.us/" target="_blank">v11</a> - backing sci-fi</li>
     <li><a href="https://ases.stanford.edu/" target="_blank">ases nyc</a> - startup nights</li>
     <li><a href="https://fr8.so" target="_blank">fr8</a> - global hacker house cult</li>
@@ -78,11 +225,11 @@
     <li>recruited at 16 for artemis III murep ag team
     </li>
     <li>wrote my own proposal → nasa funded it → kept the IP → started xyla
-
     </li>
     <li>turned down $15m+ of equity to build my own things
     </li>
-    <li>etc</li>
+    <li>now: building portable + off-grid farms that deploy in < 10 mins
+    </li>
   </ul>
 
   <h2>working assumptions</h2>
@@ -90,16 +237,177 @@
     <li>the future of engineering looks a lot like the past billion years of evolution</li>
     <li>innovation outpaces mortal instincts</li>
     <li>food is the foundation layer of civilization</li>
-    <li><em>vivitur ingenio, caeteris mortis erunt</em></li>
   </ul>
 
   <h2>contact:</h2>
   <p><a href="https://x.com/dkilledhisnani" target="_blank">x/twitter</a> | <a href="https://linkedin.com/in/dkhilnani" target="_blank">linkedin</a> </p>
-   <p> devesh<span class="email-at">@</span>xyla.space</p>
+  <p><a href="mailto:devesh@xyla.space">devesh<span class="email-at">@</span>xyla.space</a></p>
 
-  <p>^ email me if you want to talk about startups. or ducks. or duck-based startups, idk, the world is <u>amazing</u><span class="blink">.</span></p>
+  <h2><em>vivitur ingenio, caeteris mortis erunt</em><span class="blink">.</span></h2>
 
-</body>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const tooltipTriggers = document.querySelectorAll('.tooltip-trigger');
+      
+      // Position tooltip on hover
+      function positionTooltip(trigger, tooltip) {
+        // Reset any inline styles first
+        tooltip.style.position = 'fixed';
+        tooltip.style.left = '';
+        tooltip.style.right = '';
+        tooltip.style.top = '';
+        tooltip.style.bottom = '';
+        tooltip.style.transform = '';
+        tooltip.style.width = '';
+        tooltip.style.margin = '0';
+        
+        const triggerRect = trigger.getBoundingClientRect();
+        const viewportWidth = window.innerWidth;
+        const viewportHeight = window.innerHeight;
+        
+        // Mobile/Tablet: Always center at top of screen (but lower)
+        if (viewportWidth < 992) {
+          const tooltipWidth = Math.min(500, viewportWidth - 40);
+          const leftPos = Math.max(20, (viewportWidth - tooltipWidth) / 2);
+          
+          // Set different top positions based on screen size
+          let topPos;
+          if (viewportWidth >= 768) {
+            topPos = 150; // Tablet
+          } else if (viewportWidth >= 480) {
+            topPos = 140; // Mobile
+          } else {
+            topPos = 120; // Small mobile
+          }
+          
+          tooltip.style.width = tooltipWidth + 'px';
+          tooltip.style.left = leftPos + 'px';
+          tooltip.style.top = topPos + 'px';
+          tooltip.style.transform = 'none';
+          return;
+        }
+        
+        // DESKTOP: Position relative to trigger
+        const tooltipWidth = viewportWidth >= 1200 ? 500 : 450;
+        const padding = 20;
+        const tooltipHeight = 200; // Approximate tooltip height
+        
+        // Calculate vertical position - center with trigger but lower
+        const verticalCenter = triggerRect.top + (triggerRect.height / 2);
+        const topPos = Math.max(padding, verticalCenter - (tooltipHeight / 2));
+        
+        // Ensure tooltip doesn't go below screen
+        const finalTop = Math.min(topPos, viewportHeight - tooltipHeight - padding);
+        
+        // Try right side first
+        const spaceOnRight = viewportWidth - (triggerRect.right + 25 + tooltipWidth);
+        
+        if (spaceOnRight >= padding) {
+          // Enough space on right
+          tooltip.style.left = (triggerRect.left + triggerRect.width + 25) + 'px';
+          tooltip.style.top = finalTop + 'px';
+          tooltip.style.width = tooltipWidth + 'px';
+          return;
+        }
+        
+        // Try left side
+        const spaceOnLeft = triggerRect.left - 25 - tooltipWidth;
+        
+        if (spaceOnLeft >= padding) {
+          // Enough space on left
+          tooltip.style.left = (triggerRect.left - tooltipWidth - 25) + 'px';
+          tooltip.style.top = finalTop + 'px';
+          tooltip.style.width = tooltipWidth + 'px';
+          return;
+        }
+        
+        // Not enough space on sides, position below centered
+        const leftPos = Math.max(padding, (viewportWidth - tooltipWidth) / 2);
+        let belowTopPos = triggerRect.bottom + 15;
+        
+        // Check if tooltip would go below screen
+        if (belowTopPos + tooltipHeight > viewportHeight - padding) {
+          belowTopPos = triggerRect.top - tooltipHeight - 15; // Position above
+        }
+        
+        tooltip.style.left = leftPos + 'px';
+        tooltip.style.top = belowTopPos + 'px';
+        tooltip.style.width = tooltipWidth + 'px';
+      }
+      
+      // Initialize all tooltips
+      tooltipTriggers.forEach(trigger => {
+        const tooltip = trigger.querySelector('.tooltip');
+        
+        // Position on hover
+        trigger.addEventListener('mouseenter', function() {
+          positionTooltip(trigger, tooltip);
+          tooltip.style.visibility = 'visible';
+          tooltip.style.opacity = '1';
+        });
+        
+        trigger.addEventListener('mouseleave', function() {
+          tooltip.style.visibility = 'hidden';
+          tooltip.style.opacity = '0';
+        });
+        
+        // Mobile touch support
+        trigger.addEventListener('touchstart', function(e) {
+          e.preventDefault();
+          
+          if (window.innerWidth < 992) {
+            // On mobile, toggle visibility
+            if (tooltip.style.visibility === 'visible') {
+              tooltip.style.visibility = 'hidden';
+              tooltip.style.opacity = '0';
+            } else {
+              positionTooltip(trigger, tooltip);
+              tooltip.style.visibility = 'visible';
+              tooltip.style.opacity = '1';
+              
+              // Hide when tapping elsewhere
+              setTimeout(() => {
+                document.addEventListener('touchstart', function hideOnOutsideTap(e) {
+                  if (!trigger.contains(e.target)) {
+                    tooltip.style.visibility = 'hidden';
+                    tooltip.style.opacity = '0';
+                    document.removeEventListener('touchstart', hideOnOutsideTap);
+                  }
+                });
+              }, 100);
+            }
+          }
+        });
+      });
+      
+      // Reposition tooltips on window resize
+      let resizeTimer;
+      window.addEventListener('resize', function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function() {
+          tooltipTriggers.forEach(trigger => {
+            const tooltip = trigger.querySelector('.tooltip');
+            if (window.getComputedStyle(tooltip).visibility === 'visible') {
+              positionTooltip(trigger, tooltip);
+            }
+          });
+        }, 250);
+      });
+      
+      // Initial check to ensure proper positioning on load
+      window.addEventListener('load', function() {
+        // Small delay to ensure everything is rendered
+        setTimeout(() => {
+          tooltipTriggers.forEach(trigger => {
+            const tooltip = trigger.querySelector('.tooltip');
+            // Pre-calculate position but don't show
+            positionTooltip(trigger, tooltip);
+            tooltip.style.visibility = 'hidden';
+            tooltip.style.opacity = '0';
+          });
+        }, 100);
+      });
+    });
+  </script>
+</head>
 </html>
-
-
