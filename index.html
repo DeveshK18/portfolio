@@ -30,6 +30,7 @@
       overflow: hidden;
     }
 
+
     #page {
       display: flex;
       flex-direction: column;
@@ -109,16 +110,16 @@
     }
 
     @media (max-width: 900px) {
-      main {
-        grid-template-columns: 1fr 1fr;
-        grid-gap: 2ch;
-        padding: var(--lh) 1ch;
-      }
+      html, body { overflow: auto; font-size: 13px; }
+      #page { height: auto; min-height: 100vh; overflow: visible; }
+      #content { overflow: visible; }
+      main { grid-template-columns: 1fr 1fr; grid-gap: 2ch; padding: var(--lh) 1ch; }
       main > div { border-left: none; padding-left: 0; border-top: 1px dashed #333; padding-top: var(--lh); }
       main > div:first-child { border-top: none; padding-top: 0; }
       #col-bio { grid-column: 1 / -1; }
     }
     @media (max-width: 500px) {
+      html, body { font-size: 14px; }
       main { grid-template-columns: 1fr; grid-gap: 1ch; }
     }
   </style>
