@@ -34,7 +34,7 @@
     /* ── content grid ─────────────────────── */
     main {
       display: grid;
-      grid-template-columns: var(--col) calc(var(--col) * 2 + var(--gap)) var(--col) var(--col) var(--col) var(--col);
+      grid-template-columns: var(--col) calc(var(--col) * 2 + var(--gap)) 22ch var(--col) var(--col) var(--col);
       grid-gap: var(--gap);
       padding: var(--lh) var(--gap);
       max-width: 100vw;
@@ -150,7 +150,10 @@
   <div id="col-origin">
     <span class="label">origin</span>
     <div class="item">
-      <span class="item-sub">got lost in an indian airport<br>→ built ar/vr nav startup</span>
+      <span class="item-sub">started bio undergrad at 14</span>
+    </div>
+    <div class="item">
+      <span class="item-sub">got lost in a random airport<br>→ built ar/vr nav startup</span>
     </div>
     <div class="item">
       <span class="item-sub">moved to hardware<br>→ raised $500k for a bme lab</span>
@@ -187,7 +190,7 @@
       <a href="https://linkedin.com/in/dkhilnani" target="_blank" class="item-name">linkedin</a>
     </div>
     <div class="item">
-      <a href="mailto:devesh@xyla.space" class="item-name">devesh@xyla.space</a>
+      <a href="/cdn-cgi/l/email-protection#c6a2a3b0a3b5ae86bebfaaa7e8b5b6a7a5a3" class="item-name"><span class="__cf_email__" data-cfemail="0d69687b687e654d7574616c237e7d6c6e68">[email&#160;protected]</span></a>
     </div>
     <div class="item" style="margin-top: var(--lh);">
       <span class="item-sub dim">vivitur ingenio,<br>caeteris mortis erunt</span>
@@ -202,7 +205,7 @@
   <pre id="gol"></pre>
 </div>
 
-<script type="module">
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="module">
 
 function measureChar(el) {
   const cs  = getComputedStyle(el)
@@ -297,7 +300,7 @@ function sizeWrap() {
   metrics = measureChar(pre)
   const hintEl     = document.getElementById('gol-hint')
   const hintBottom = hintEl.getBoundingClientRect().bottom
-  const remaining  = Math.max(window.innerHeight - hintBottom - 4, 0)
+  const remaining  = Math.max(window.innerHeight - hintBottom - 4, 120)
   wrap.style.height = remaining + 'px'
 
   const newCols = Math.floor(wrap.clientWidth  / metrics.cellWidth)  || 1
