@@ -12,7 +12,7 @@
     :root {
       --lh: 18px;
       --col: 16ch;
-      --gap: 2ch;
+      --gap: 4ch;
       --fg:     #e8e8e8;
       --fg-dim: #666;
       --fg-mid: #888;
@@ -90,6 +90,7 @@
     @media (max-width: 900px) {
       main {
         grid-template-columns: 1fr 1fr;
+        grid-gap: 2ch;
         padding: var(--lh) 1ch;
       }
       main > div {
@@ -101,7 +102,7 @@
       #col-bio { grid-column: 1 / -1; }
     }
     @media (max-width: 500px) {
-      main { grid-template-columns: 1fr; }
+      main { grid-template-columns: 1fr; grid-gap: 1ch; }
     }
   </style>
 </head>
