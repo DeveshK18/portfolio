@@ -23,21 +23,24 @@
       background: var(--bg);
       color: var(--fg);
       font-family: 'IBM Plex Mono', 'Courier New', monospace;
-      font-size: clamp(11px, 1.1vw, 18px);
+      font-size: clamp(10px, 0.85vw, 15px);
       font-weight: 400;
       line-height: var(--lh);
       height: 100%;
+      overflow: hidden;
     }
 
-    /* full page flex column — content grows, gol fixed at 30% */
     #page {
       display: flex;
       flex-direction: column;
-      min-height: 100vh;
+      height: 100vh;
+      overflow: hidden;
     }
 
     #content {
       flex: 1;
+      min-height: 0;
+      overflow: hidden;
     }
 
     a { color: var(--fg); text-decoration: none; }
@@ -70,7 +73,7 @@
     .mid { color: var(--fg-mid); }
 
     #gol-section {
-      height: clamp(80px, 20vw, 30vh);
+      height: clamp(80px, 20vw, 22vh);
       display: flex;
       flex-direction: column;
       flex-shrink: 0;
@@ -93,7 +96,7 @@
       display: block;
       margin: 0; padding: 0;
       font-family: 'IBM Plex Mono', 'Courier New', monospace;
-      font-size: clamp(11px, 1.1vw, 18px);
+      font-size: clamp(10px, 0.85vw, 15px);
       font-weight: 400;
       line-height: var(--lh);
       background: transparent;
