@@ -1,418 +1,551 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Devesh K</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Average&family=Gabarito:wght@500&family=Fragment+Mono&display=swap" rel="stylesheet">
   <style>
-    html {
-      overflow-x: hidden;
+    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --lh: 20px;
+      --col: 18ch;
+      --gap: 2ch;
+      --fg: rgb(220, 220, 220);
+      --fg-dim: rgb(100, 100, 100);
+      --fg-mid: rgb(160, 160, 160);
+      --bg: #000;
     }
-    body {
-      font-family: 'Average', serif;
+
+    html, body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: 'IBM Plex Mono', 'Courier New', monospace;
       font-size: 14px;
-      line-height: 1.5;
-      margin: 20px;
-      padding: 0 0 0 20px; /* Increased left padding from 10px to 20px */
-      text-align: left;
-      overflow-x: hidden;
-      position: relative;
+      font-weight: 300;
+      line-height: var(--lh);
     }
-    h1 {
-      font-size: 18px;
-      font-weight: normal;
-      margin: 0 0 8px 0;
-      position: relative;
-      z-index: 1;
+
+    a { color: var(--fg); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── content grid ─────────────────────── */
+    main {
+      display: grid;
+      grid-template-columns: var(--col) calc(var(--col) * 2 + var(--gap)) var(--col) var(--col) var(--col) var(--col);
+      grid-gap: var(--gap);
+      padding: var(--lh) var(--gap);
+      max-width: 100vw;
     }
-    h2 {
+
+    main > div {
+      border-left: 1px solid var(--fg-dim);
+      padding-left: 1ch;
+    }
+    main > div:first-child { border-left: none; padding-left: 0; }
+
+    .label { color: var(--fg-dim); display: block; margin-bottom: var(--lh); }
+    .item  { margin-bottom: var(--lh); }
+    .item-name { display: block; }
+    .item-sub  { display: block; color: var(--fg-mid); }
+
+    #col-name { border-left: none; padding-left: 0; }
+    .name-big { line-height: var(--lh); display: block; margin-bottom: var(--lh); }
+    .age { color: var(--fg-dim); }
+
+    #col-bio p { margin-bottom: var(--lh); color: var(--fg-mid); }
+    #col-bio p span { color: var(--fg); }
+
+    .dim { color: var(--fg-dim); }
+    .mid { color: var(--fg-mid); }
+
+    /* ── gol strip ────────────────────────── */
+    #gol-wrap {
+      width: 100%;
+      overflow: hidden;
+    }
+
+    #gol {
+      display: block;
+      margin: 0; padding: 0;
+      font-family: 'IBM Plex Mono', 'Courier New', monospace;
       font-size: 14px;
-      font-weight: normal;
-      margin: 20px 0 5px 0;
-    }
-    p {
-      margin: 8px 0;
-    }
-    ul {
-      margin: 5px 0;
-    }
-    li {
-      margin: 3px 0;
-    }
-    .email-at {
-      margin: 0 0.15em;
-    }
-    .age {
-      font-size: 14px;
-      margin-left: 12px;
-    }
-    a {
-      color: #b22222;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-    .name-highlight {
-      background-color: #b22222;        
-      color: white;
-      font-family: 'Average', serif;
-      font-weight: normal;
-      letter-spacing: 1px;
-      padding: 2px 8px;
-      text-transform: uppercase;
-      border: 2px solid #000;
-      box-shadow: 3.5px 3.5px 0 #000;
-      position: relative;
-      z-index: 2;
-      margin-left: -4px; /* Compensate for border and shadow */
-      display: inline-block;
-    }
-    @keyframes blink {
-      0%, 50% { opacity: 1; }
-      51%, 100% { opacity: 0; }
-    }
-    .blink {
-      animation: blink 1s infinite;
-    }
-    .tooltip-trigger {
-      text-decoration: underline;
-      text-decoration-style: dotted;
-      text-decoration-color: #b22222;
+      font-weight: 300;
+      line-height: var(--lh);
+      color: var(--fg-dim);
+      background: transparent;
       cursor: default;
-      position: relative;
-      display: inline-block;
-      max-width: 100%;
+      user-select: none;
+      white-space: pre;
+      overflow: hidden;
     }
-    .tooltip {
-      visibility: hidden;
-      opacity: 0;
-      position: fixed;
-      background-color: #fff;
-      color: #b22222;
-      padding: 20px;
-      border: 4px solid #000;
-      box-shadow: 3.5px 3.5px 0 #000;
-      width: 500px;
-      max-width: 500px;
-      z-index: 10000;
-      font-family: 'Fragment Mono', monospace !important;
-      font-size: 14px;
-      line-height: 1.4;
-      transition: opacity 0.2s ease-in-out;
-      white-space: normal;
-      word-wrap: break-word;
-      overflow-wrap: break-word;
-      box-sizing: border-box;
-      overflow: visible;
+
+    /* ── mobile ──────────────────────────── */
+    @media (max-width: 900px) {
+      main {
+        grid-template-columns: 1fr 1fr;
+        padding: var(--lh) 1ch;
+      }
+      main > div {
+        border-left: none; padding-left: 0;
+        border-top: 1px solid var(--fg-dim);
+        padding-top: var(--lh);
+      }
+      main > div:first-child { border-top: none; padding-top: 0; }
+      #col-bio { grid-column: 1 / -1; }
     }
-    .tooltip-trigger:hover .tooltip {
-      visibility: visible;
-      opacity: 1;
-    }
-    
-    /* DESKTOP: Large screens - position to right */
-    @media (min-width: 1200px) {
-      .tooltip {
-        width: 500px;
-        max-width: 500px;
-      }
-    }
-    
-    /* DESKTOP: Medium screens - slightly smaller */
-    @media (min-width: 992px) and (max-width: 1199px) {
-      .tooltip {
-        width: 450px;
-        max-width: 450px;
-      }
-    }
-    
-    /* TABLET: Position below, responsive width */
-    @media (max-width: 991px) and (min-width: 768px) {
-      .tooltip {
-        left: 50%;
-        top: 150px;
-        transform: translateX(-50%);
-        margin-left: 0;
-        width: 90vw;
-        max-width: 90vw;
-        padding: 15px;
-      }
-    }
-    
-    /* MOBILE: Position below, responsive width */
-    @media (max-width: 767px) {
-      body {
-        padding-left: 15px; /* Adjust for mobile */
-        margin: 10px;
-      }
-      
-      .tooltip {
-        left: 50%;
-        top: 140px;
-        transform: translateX(-50%);
-        margin-left: 0;
-        width: calc(100vw - 40px);
-        max-width: calc(100vw - 40px);
-        padding: 15px;
-        font-size: 13px;
-      }
-      
-      .name-highlight {
-        margin-left: -2px; /* Less compensation on mobile */
-      }
-    }
-    
-    /* SMALL MOBILE: Adjust padding */
-    @media (max-width: 480px) {
-      body {
-        padding-left: 12px;
-        margin: 8px;
-      }
-      
-      .tooltip {
-        padding: 12px;
-        width: calc(100vw - 30px);
-        max-width: calc(100vw - 30px);
-        top: 120px;
-      }
-      
-      .name-highlight {
-        margin-left: -1px;
-      }
-    }
-    
-    /* Ensure the name highlight is fully visible on all screens */
-    @media (min-width: 768px) {
-      body::before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 30px; /* Extra space for the name highlight */
-        height: 100%;
-        background: transparent;
-        z-index: 0;
-      }
+    @media (max-width: 500px) {
+      main { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
-  <h1>wsp, i'm ‎   <span class="name-highlight">devesh khilnani</span><span class="age">(17, m)</span></h1>
-  
 
+<main>
 
-  <h2>now:</h2>
-  <ul>
-    <li><a href="http://xyla.space" target="_blank">xyla</a> - food for <span class="tooltip-trigger">the next manifest destiny<span class="tooltip">Human progress has always been defined by food. The moment we learned to grow crops instead of chase animals we developed surplus, specialization, cities, technology, and expansion. Every frontier (continental, industrial, digital, and now extraterrestrial) has been gated by the food revolution that enabled it. As we push into harsher environments, off-grid industries, and off-world settlements, biology becomes the limiting factor again. The next chapter of human expansion needs an Agriculture 4.0, a new way to grow independent of environment, location, and infrastructure. Xyla is the foundation of the next manifest destiny.</span></span>    </li>
-    <li><a href="https://www.velocity11.us/" target="_blank">v11</a> - backing sci-fi</li>
-    <li><a href="https://ases.stanford.edu/" target="_blank">ases nyc</a> - startup nights</li>
-    <li><a href="https://fr8.so" target="_blank">fr8</a> - global hacker house cult</li>
-    <li><a>tkd</a> - paid to beat up kids competitively</li>
-  </ul>
+  <!-- col 1: name -->
+  <div id="col-name">
+    <span class="name-big">devesh khilnani<br><span class="age">18, m</span></span>
+    <span class="label">//</span>
+    <div class="item">
+      <span class="item-name">founder</span>
+      <span class="item-sub">xyla</span>
+    </div>
+  </div>
 
-  <h2>origin story:</h2>
-  <ul>
-    <li>got lost in an indian airport → built ar/vr nav startup
-    </li>
-    <li>moved to hardware → raised $500k → built a bme lab
-    </li>
-    <li>recruited at 16 for artemis III nasa murep ag team
-    </li>
-    <li>wrote my own proposal → nasa funded it → kept IP + left to build faster
-    </li>
-    <li>turned down $15m+ of equity to build my own things
-    </li>
-    <li>now: building portable + off-grid farms that deploy in < 10 mins
-    </li>
-  </ul>
+  <!-- col 2: bio -->
+  <div id="col-bio">
+    <span class="label">now</span>
+    <p>
+      <span>building <a href="https://xyla.space" target="_blank">xyla</a></span> —
+      deployable off-grid biofactories for the frontlines.
+    </p>
+    <span class="label" style="margin-top: var(--lh);">also</span>
+    <div class="item">
+    <span class="item-name"><a href="https://velocity11.us/" target="_blank" class="mid">v11</a></span>
+      <span class="item-sub">backing sci-fi</span>
+    </div>
+    <div class="item">
+      <span class="item-name"><a href="https://ases.stanford.edu/" target="_blank" class="mid">ases nyc</a></span>
+      <span class="item-sub">startup nights</span>
+    </div>
+    <div class="item">
+      <span class="item-name"><a href="https://fr8.so" target="_blank" class="mid">fr8</a></span>
+      <span class="item-sub">cohort 1.0 - deeptech residency</span>
+    </div>
+    <div class="item">
+      <span class="item-name dim">tkd</span>
+      <span class="item-sub">state competitor // instructor</span>
+    </div>
+  </div>
 
-  <h2>working assumptions</h2>
-  <ul>
-    <li>the future of engineering looks a lot like the past billion years of evolution</li>
-    <li>innovation outpaces mortal instincts</li>
-    <li>food is the foundation layer of civilization</li>
-  </ul>
+  <!-- col 3: origin -->
+  <div id="col-origin">
+    <span class="label">origin</span>
+    <div class="item">
+      <span class="item-sub">got lost in an indian airport<br>→ built ar/vr nav startup</span>
+    </div>
+    <div class="item">
+      <span class="item-sub">moved to hardware<br>→ raised $500k</span>
+    </div>
+    <div class="item">
+      <span class="item-sub">recruited at 16 for<br>artemis III nasa murep ag team</span>
+    </div>
+    <div class="item">
+      <span class="item-sub">wrote my own proposal<br>→ nasa funded it<br>→ kept IP + left to<br>build faster</span>
+    </div>
+  </div>
 
-  <h2>contact:</h2>
-  <p><a href="https://x.com/dkilledhisnani" target="_blank">x/twitter</a> | <a href="https://linkedin.com/in/dkhilnani" target="_blank">linkedin</a> </p>
-  <p><a href="mailto:devesh@xyla.space">devesh<span class="email-at">@</span>xyla.space</a></p>
+  <!-- col 4: priors -->
+  <div id="col-assumptions">
+    <span class="label">priors</span>
+    <div class="item">
+      <span class="item-sub">the future of engineering<br>looks a lot like the past<br>billion years of evolution</span>
+    </div>
+    <div class="item">
+      <span class="item-sub">innovation outpaces<br>mortal instincts</span>
+    </div>
+    <div class="item">
+      <span class="item-sub">food is the foundation<br>layer of civilization</span>
+    </div>
+  </div>
 
-  <h2><em>vivitur ingenio, caeteris mortis erunt</em><span class="blink">.</span></h2>
+  <!-- col 5: contact -->
+  <div id="col-contact">
+    <span class="label">contact</span>
+    <div class="item">
+      <a href="https://x.com/dkilledhisnani" target="_blank" class="item-name">x / twitter</a>
+    </div>
+    <div class="item">
+      <a href="https://linkedin.com/in/dkhilnani" target="_blank" class="item-name">linkedin</a>
+    </div>
+    <div class="item">
+      <a href="mailto:devesh@xyla.space" class="item-name">devesh@xyla.space</a>
+    </div>
+    <div class="item" style="margin-top: var(--lh);">
+      <span class="item-sub dim">vivitur ingenio,<br>caeteris mortis erunt</span>
+    </div>
+  </div>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const tooltipTriggers = document.querySelectorAll('.tooltip-trigger');
-      
-      // Position tooltip on hover
-      function positionTooltip(trigger, tooltip) {
-        // Reset any inline styles first
-        tooltip.style.position = 'fixed';
-        tooltip.style.left = '';
-        tooltip.style.right = '';
-        tooltip.style.top = '';
-        tooltip.style.bottom = '';
-        tooltip.style.transform = '';
-        tooltip.style.width = '';
-        tooltip.style.margin = '0';
-        
-        const triggerRect = trigger.getBoundingClientRect();
-        const viewportWidth = window.innerWidth;
-        const viewportHeight = window.innerHeight;
-        
-        // Mobile/Tablet: Always center at top of screen (but lower)
-        if (viewportWidth < 992) {
-          const tooltipWidth = Math.min(500, viewportWidth - 40);
-          const leftPos = Math.max(20, (viewportWidth - tooltipWidth) / 2);
-          
-          // Set different top positions based on screen size
-          let topPos;
-          if (viewportWidth >= 768) {
-            topPos = 150; // Tablet
-          } else if (viewportWidth >= 480) {
-            topPos = 140; // Mobile
-          } else {
-            topPos = 120; // Small mobile
-          }
-          
-          tooltip.style.width = tooltipWidth + 'px';
-          tooltip.style.left = leftPos + 'px';
-          tooltip.style.top = topPos + 'px';
-          tooltip.style.transform = 'none';
-          return;
-        }
-        
-        // DESKTOP: Position relative to trigger
-        const tooltipWidth = viewportWidth >= 1200 ? 500 : 450;
-        const padding = 20;
-        const tooltipHeight = 200; // Approximate tooltip height
-        
-        // Calculate vertical position - center with trigger but lower
-        const verticalCenter = triggerRect.top + (triggerRect.height / 2);
-        const topPos = Math.max(padding, verticalCenter - (tooltipHeight / 2));
-        
-        // Ensure tooltip doesn't go below screen
-        const finalTop = Math.min(topPos, viewportHeight - tooltipHeight - padding);
-        
-        // Try right side first
-        const spaceOnRight = viewportWidth - (triggerRect.right + 25 + tooltipWidth);
-        
-        if (spaceOnRight >= padding) {
-          // Enough space on right
-          tooltip.style.left = (triggerRect.left + triggerRect.width + 25) + 'px';
-          tooltip.style.top = finalTop + 'px';
-          tooltip.style.width = tooltipWidth + 'px';
-          return;
-        }
-        
-        // Try left side
-        const spaceOnLeft = triggerRect.left - 25 - tooltipWidth;
-        
-        if (spaceOnLeft >= padding) {
-          // Enough space on left
-          tooltip.style.left = (triggerRect.left - tooltipWidth - 25) + 'px';
-          tooltip.style.top = finalTop + 'px';
-          tooltip.style.width = tooltipWidth + 'px';
-          return;
-        }
-        
-        // Not enough space on sides, position below centered
-        const leftPos = Math.max(padding, (viewportWidth - tooltipWidth) / 2);
-        let belowTopPos = triggerRect.bottom + 15;
-        
-        // Check if tooltip would go below screen
-        if (belowTopPos + tooltipHeight > viewportHeight - padding) {
-          belowTopPos = triggerRect.top - tooltipHeight - 15; // Position above
-        }
-        
-        tooltip.style.left = leftPos + 'px';
-        tooltip.style.top = belowTopPos + 'px';
-        tooltip.style.width = tooltipWidth + 'px';
+</main>
+
+<div id="gol-wrap">
+  <pre id="gol"></pre>
+</div>
+
+<script type="module">
+
+// ── measure font ──────────────────────────────────────────────────────────────
+function measureChar(el) {
+  const cs  = getComputedStyle(el)
+  const fontSize   = parseFloat(cs.fontSize)
+  const fontFamily = cs.fontFamily
+  const lineHeight = parseFloat(cs.lineHeight)
+  const canvas = document.createElement('canvas')
+  const ctx = canvas.getContext('2d')
+  ctx.font = `300 ${fontSize}px ${fontFamily}`
+  const cellWidth = ctx.measureText('x').width
+  return { cellWidth, lineHeight, fontSize, fontFamily }
+}
+
+// ── GOL state ─────────────────────────────────────────────────────────────────
+let golCols = 0, golRows = 0
+const golData = [null, null]
+
+// ── pointer (declared early so golStep can read it) ───────────────────────────
+const pointer = { x: -1, y: -1, pressed: false }
+
+function golSet(val, x, y, w, h, buf) {
+  if (x < 0 || x >= w || y < 0 || y >= h) return
+  buf[y * w + x] = val
+}
+function golGet(x, y, w, h, buf) {
+  if (x < 0 || x >= w || y < 0 || y >= h) return 0
+  return buf[y * w + x]
+}
+
+function golInit(cols, rows) {
+  golCols = cols
+  golRows = rows
+  const len = cols * rows * 2
+  golData[0] = new Uint8Array(len)
+  golData[1] = new Uint8Array(len)
+  for (let i = 0; i < len; i++) {
+    const v = Math.random() > 0.5 ? 1 : 0
+    golData[0][i] = v
+    golData[1][i] = v
+  }
+}
+
+function golStep(frame) {
+  const prev = golData[ frame % 2]
+  const curr = golData[(frame + 1) % 2]
+  const w = golCols, h = golRows * 2
+
+  // splat random cells around cursor when pressed — write into both buffers
+  if (pointer.pressed && pointer.x >= 0) {
+    const cx = Math.floor(pointer.x)
+    const cy = Math.floor(pointer.y * 2)
+    const s  = 5
+    for (let y = cy - s; y <= cy + s; y++) {
+      for (let x = cx - s; x <= cx + s; x++) {
+        const v = Math.random() < 0.5 ? 1 : 0
+        golSet(v, x, y, w, h, prev)
+        golSet(v, x, y, w, h, curr)
       }
-      
-      // Initialize all tooltips
-      tooltipTriggers.forEach(trigger => {
-        const tooltip = trigger.querySelector('.tooltip');
-        
-        // Position on hover
-        trigger.addEventListener('mouseenter', function() {
-          positionTooltip(trigger, tooltip);
-          tooltip.style.visibility = 'visible';
-          tooltip.style.opacity = '1';
-        });
-        
-        trigger.addEventListener('mouseleave', function() {
-          tooltip.style.visibility = 'hidden';
-          tooltip.style.opacity = '0';
-        });
-        
-        // Mobile touch support
-        trigger.addEventListener('touchstart', function(e) {
-          e.preventDefault();
-          
-          if (window.innerWidth < 992) {
-            // On mobile, toggle visibility
-            if (tooltip.style.visibility === 'visible') {
-              tooltip.style.visibility = 'hidden';
-              tooltip.style.opacity = '0';
-            } else {
-              positionTooltip(trigger, tooltip);
-              tooltip.style.visibility = 'visible';
-              tooltip.style.opacity = '1';
-              
-              // Hide when tapping elsewhere
-              setTimeout(() => {
-                document.addEventListener('touchstart', function hideOnOutsideTap(e) {
-                  if (!trigger.contains(e.target)) {
-                    tooltip.style.visibility = 'hidden';
-                    tooltip.style.opacity = '0';
-                    document.removeEventListener('touchstart', hideOnOutsideTap);
-                  }
-                });
-              }, 100);
-            }
-          }
-        });
-      });
-      
-      // Reposition tooltips on window resize
-      let resizeTimer;
-      window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-          tooltipTriggers.forEach(trigger => {
-            const tooltip = trigger.querySelector('.tooltip');
-            if (window.getComputedStyle(tooltip).visibility === 'visible') {
-              positionTooltip(trigger, tooltip);
-            }
-          });
-        }, 250);
-      });
-      
-      // Initial check to ensure proper positioning on load
-      window.addEventListener('load', function() {
-        // Small delay to ensure everything is rendered
-        setTimeout(() => {
-          tooltipTriggers.forEach(trigger => {
-            const tooltip = trigger.querySelector('.tooltip');
-            // Pre-calculate position but don't show
-            positionTooltip(trigger, tooltip);
-            tooltip.style.visibility = 'hidden';
-            tooltip.style.opacity = '0';
-          });
-        }, 100);
-      });
-    });
-  </script>
-</head>
+    }
+  }
+
+  for (let y = 0; y < h; y++) {
+    for (let x = 0; x < w; x++) {
+      const cur = golGet(x, y, w, h, prev)
+      const n =
+        golGet(x-1,y-1,w,h,prev) + golGet(x,y-1,w,h,prev) + golGet(x+1,y-1,w,h,prev) +
+        golGet(x-1,y,  w,h,prev) +                           golGet(x+1,y,  w,h,prev) +
+        golGet(x-1,y+1,w,h,prev) + golGet(x,y+1,w,h,prev) + golGet(x+1,y+1,w,h,prev)
+      curr[x + y * w] = cur ? (n === 2 || n === 3 ? 1 : 0) : (n === 3 ? 1 : 0)
+    }
+  }
+}
+
+// ── renderer ──────────────────────────────────────────────────────────────────
+const pre    = document.getElementById('gol')
+const wrap   = document.getElementById('gol-wrap')
+const mainEl = document.querySelector('main')
+
+let cols = 0, rows = 0, frame = 0
+let metrics = measureChar(pre)
+
+// ── pointer tracking ─────────────────────────────────────────────────────────
+
+pre.addEventListener('pointermove', e => {
+  const r = pre.getBoundingClientRect()
+  pointer.x = (e.clientX - r.left)  / metrics.cellWidth
+  pointer.y = (e.clientY - r.top)   / metrics.lineHeight
+  e.preventDefault()
+})
+pre.addEventListener('pointerdown', e => {
+  pointer.pressed = true
+  pre.setPointerCapture(e.pointerId)
+  e.preventDefault()
+})
+pre.addEventListener('pointerup',    () => { pointer.pressed = false })
+pre.addEventListener('pointerleave', () => { pointer.pressed = false })
+
+function sizeWrap() {
+  metrics = measureChar(pre)
+  const mainBottom = mainEl.getBoundingClientRect().bottom
+  const remaining  = Math.max(window.innerHeight - mainBottom, 0)
+  wrap.style.height = remaining + 'px'
+
+  const newCols = Math.floor(wrap.clientWidth  / metrics.cellWidth)  || 1
+  const newRows = Math.floor(remaining          / metrics.lineHeight) || 1
+
+  if (newCols !== cols || newRows !== rows) {
+    cols = newCols
+    rows = newRows
+    golInit(cols, rows)
+  }
+}
+
+const COLORS = ['deeppink', 'red', 'orange', 'yellow', 'blue', 'deeppink']
+
+function getColor(x, y, frame) {
+  // slow diagonal wave across the grid
+  const wave = (x * 0.15 + y * 0.3 + frame * 0.08) % COLORS.length
+  const i    = Math.floor(wave) % COLORS.length
+  const next = (i + 1) % COLORS.length
+  // hard-edge between colors — no blend, just stepping gives a tendril feel
+  return COLORS[i]
+}
+
+function render() {
+  const curr = golData[(frame + 1) % 2]
+  const lines = []
+  for (let y = 0; y < rows; y++) {
+    let line = ''
+    let spans = []
+    let curColor = null
+    let curChars = ''
+
+    for (let x = 0; x < cols; x++) {
+      const idx   = x + y * 2 * cols
+      const upper = curr[idx]
+      const lower = curr[idx + cols]
+      const alive = upper || lower
+
+      let ch, color
+      if (upper && lower) ch = '█'
+      else if (upper)     ch = '▀'
+      else if (lower)     ch = '▄'
+      else                ch = ' '
+
+      color = alive ? getColor(x, y, frame) : null
+
+      if (color !== curColor) {
+        if (curChars) {
+          spans.push(curColor
+            ? `<span style="color:${curColor}">${curChars}</span>`
+            : curChars)
+        }
+        curColor = color
+        curChars = ch
+      } else {
+        curChars += ch
+      }
+    }
+    if (curChars) {
+      spans.push(curColor
+        ? `<span style="color:${curColor}">${curChars}</span>`
+        : curChars)
+    }
+    lines.push(spans.join(''))
+  }
+  pre.innerHTML = lines.join('\n')
+}
+
+const FPS = 15
+let lastTime = 0
+
+function loop(ts) {
+  requestAnimationFrame(loop)
+  if (ts - lastTime < 1000 / FPS) return
+  lastTime = ts
+  golStep(frame)
+  render()
+  frame++
+}
+
+document.fonts.ready.then(() => {
+  sizeWrap()
+  window.addEventListener('resize', sizeWrap)
+  requestAnimationFrame(loop)
+})
+
+// ── link gradient underlines ──────────────────────────────────────────────────
+const linkStyle = document.createElement('style')
+linkStyle.textContent = `
+  @keyframes linkHue {
+    0%   { text-decoration-color: #ff1493; }
+    25%  { text-decoration-color: #ff6600; }
+    50%  { text-decoration-color: #ffcc00; }
+    75%  { text-decoration-color: #4444ff; }
+    100% { text-decoration-color: #ff1493; }
+  }
+  main a {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    text-decoration-color: #ff1493;
+    animation: linkHue 4s linear infinite;
+  }
+  main a:hover {
+    text-decoration-thickness: 2px;
+  }
+`
+document.head.appendChild(linkStyle)
+
+// ── link click: floating mini-GOL burst that expands and fizzles ─────────────
+function spawnLinkBurst(clientX, clientY, href, target) {
+  const CW = metrics.cellWidth
+  const CH = metrics.lineHeight
+
+  // start with a 5x5 seed (matching the pointer splat radius=5, single res)
+  let gW = 11, gH = 11
+  let buf = [new Uint8Array(gW * gH), new Uint8Array(gW * gH)]
+
+  // seed center — exactly like pointer click: random 50/50
+  const cx = Math.floor(gW / 2), cy = Math.floor(gH / 2)
+  for (let dy = -5; dy <= 5; dy++) {
+    for (let dx = -5; dx <= 5; dx++) {
+      const v = Math.random() < 0.5 ? 1 : 0
+      const i = (cy + dy) * gW + (cx + dx)
+      if (i >= 0 && i < buf[0].length) { buf[0][i] = v; buf[1][i] = v }
+    }
+  }
+
+  const el = document.createElement('pre')
+  el.style.cssText = `
+    position: fixed;
+    pointer-events: none;
+    z-index: 999;
+    font-family: 'IBM Plex Mono','Courier New',monospace;
+    font-size: 9px;
+    font-weight: 300;
+    line-height: 11px;
+    background: transparent;
+    margin: 0; padding: 0;
+    white-space: pre;
+  `
+  document.body.appendChild(el)
+
+  let f = 0
+  const FPS = 15
+  let last = 0
+  let done = false
+  const MAX_FRAMES = 30
+
+  function step(ts) {
+    if (done) return
+    if (ts - last < 1000 / FPS) { requestAnimationFrame(step); return }
+    last = ts
+
+    // expand grid by 1 on each side every other frame so cells can spread out
+    if (f % 2 === 0 && gW < 28) {
+      const newW = gW + 2, newH = gH + 2
+      const nb0 = new Uint8Array(newW * newH)
+      const nb1 = new Uint8Array(newW * newH)
+      // copy existing cells offset by 1
+      for (let y = 0; y < gH; y++) {
+        for (let x = 0; x < gW; x++) {
+          nb0[(y + 1) * newW + (x + 1)] = buf[f % 2][y * gW + x]
+          nb1[(y + 1) * newW + (x + 1)] = buf[(f+1) % 2][y * gW + x]
+        }
+      }
+      gW = newW; gH = newH
+      buf[0] = nb0; buf[1] = nb1
+    }
+
+    // GOL step
+    const prev = buf[ f % 2]
+    const curr = buf[(f + 1) % 2]
+    for (let y = 0; y < gH; y++) {
+      for (let x = 0; x < gW; x++) {
+        const c = prev[y * gW + x]
+        let n = 0
+        for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
+          if (dx === 0 && dy === 0) continue
+          const nx = x + dx, ny = y + dy
+          if (nx >= 0 && nx < gW && ny >= 0 && ny < gH) n += prev[ny * gW + nx]
+        }
+        curr[y * gW + x] = c ? (n===2||n===3?1:0) : (n===3?1:0)
+      }
+    }
+
+    // count alive cells — if dead, fizzle immediately
+    let alive = 0
+    for (let i = 0; i < curr.length; i++) alive += curr[i]
+
+    // render — position el so grid stays centered on click point
+    const lines = []
+    for (let y = 0; y < gH; y++) {
+      let line = ''
+      for (let x = 0; x < gW; x++) {
+        line += curr[y * gW + x] ? '█' : ' '
+      }
+      lines.push(line)
+    }
+    el.textContent = lines.join('\n')
+    el.style.color  = COLORS[Math.floor(f * 0.4) % COLORS.length]
+    el.style.left   = (clientX - gW * 5.4 / 2) + 'px'
+    el.style.top    = (clientY - gH * 11  / 2) + 'px'
+
+    // fade out opacity as it ages
+    const age = f / MAX_FRAMES
+    el.style.opacity = age > 0.6 ? Math.max(0, 1 - (age - 0.6) / 0.4) : '1'
+
+    f++
+
+    if (alive === 0 || f >= MAX_FRAMES) {
+      done = true
+      el.style.opacity = '0'
+      setTimeout(navigate, 400)
+    } else {
+      requestAnimationFrame(step)
+    }
+  }
+
+  let navigated = false
+  function navigate() {
+    if (navigated) return
+    navigated = true
+    el.remove()
+    if (href.startsWith('mailto')) {
+      window.location.href = href
+    } else if (target === '_blank') {
+      window.open(href, '_blank')
+    } else {
+      window.location.href = href
+    }
+  }
+
+  requestAnimationFrame(step)
+}
+
+document.querySelectorAll('a[href]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault()
+    const rect = a.getBoundingClientRect()
+    spawnLinkBurst(
+      rect.left + rect.width  / 2,
+      rect.top  + rect.height / 2,
+      a.href, a.target
+    )
+  })
+})
+</script>
+</body>
 </html>
-
-
-
-
-
-
-
