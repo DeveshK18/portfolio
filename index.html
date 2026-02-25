@@ -407,7 +407,7 @@ linkStyle.textContent = `
 document.head.appendChild(linkStyle)
 
 // ── link click: floating mini-GOL burst that expands and fizzles ─────────────
-function spawnLinkBurst(clientX, clientY, href, target) {
+function spawnLinkBurst(clientX, clientY) {
   let gW = 11, gH = 11
   let buf = [new Uint8Array(gW * gH), new Uint8Array(gW * gH)]
 
@@ -494,23 +494,9 @@ function spawnLinkBurst(clientX, clientY, href, target) {
     if (alive === 0 || f >= MAX_FRAMES) {
       done = true
       el.style.opacity = '0'
-      setTimeout(navigate, 400)
+      setTimeout(() => el.remove(), 400)
     } else {
       requestAnimationFrame(step)
-    }
-  }
-
-  let navigated = false
-  function navigate() {
-    if (navigated) return
-    navigated = true
-    el.remove()
-    if (href.startsWith('mailto')) {
-      window.location.href = href
-    } else if (target === '_blank') {
-      window.open(href, '_blank')
-    } else {
-      window.location.href = href
     }
   }
 
@@ -521,7 +507,16 @@ document.querySelectorAll('a[href]').forEach(a => {
   a.addEventListener('click', e => {
     e.preventDefault()
     const rect = a.getBoundingClientRect()
-    spawnLinkBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, a.href, a.target)
+    spawnLinkBurst(rect.left + rect.width / 2, rect.top + rect.height / 2)
+    const href   = a.href
+    const target = a.target
+    if (href.startsWith('mailto')) {
+      window.location.href = href
+    } else if (target === '_blank') {
+      window.open(href, '_blank')
+    } else {
+      window.location.href = href
+    }
   })
 })
 </script>
